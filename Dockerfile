@@ -80,6 +80,6 @@ WORKDIR /unifi
 
 HEALTHCHECK --start-period=5m CMD /usr/local/bin/docker-healthcheck.sh || exit 1
 
-ENTRYPOINT ["/usr/bin/java", "-Xmx${JVM_MAX_HEAP_SIZE}", "-jar", "/usr/lib/unifi/lib/ace.jar"]
+ENTRYPOINT ["/usr/bin/java", "-Xmx768", "-jar", "/usr/lib/unifi/lib/ace.jar"]
 
 CMD ["start"]
