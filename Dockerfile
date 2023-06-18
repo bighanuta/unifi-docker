@@ -80,12 +80,6 @@ WORKDIR /unifi
 
 HEALTHCHECK --start-period=5m CMD /usr/local/bin/docker-healthcheck.sh || exit 1
 
-# execute controller using JSVC like original debian package does
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/java", "-Xmx${JVM_MAX_HEAP_SIZE}", "-jar", "/usr/lib/unifi/lib/ace.jar"]
 
-CMD ["unifi"]
-
-# execute the conroller directly without using the service
-#ENTRYPOINT ["/usr/bin/java", "-Xmx${JVM_MAX_HEAP_SIZE}", "-jar", "/usr/lib/unifi/lib/ace.jar"]
-  # See issue #12 on github: probably want to consider how JSVC handled creating multiple processes, issuing the -stop instraction, etc. Not sure if the above ace.jar class gracefully handles TERM signals.
-#CMD ["start"]
+CMD ["start"]
